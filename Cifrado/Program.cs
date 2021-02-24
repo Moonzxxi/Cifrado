@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,105 +52,125 @@ namespace Cifrado
        //-------------------------------------------------------------------------------------------------------//
         static void Main(string[] args)
         {
-            int Select;
+            string question="";
+            do
+            {
+                int Select;
+                
+                Console.WriteLine("Saludos...");
+                Thread.Sleep(1000);
 
-            Console.WriteLine("Saludos...");
-            Thread.Sleep(1000);
-            
-            Console.Clear();
-            String menu = @"
+                Console.Clear();
+                String menu = @"
              -------------------------------------------------------
                Seleccione el cifrado a usar:
              -------------------------------------------------------
                 1. Cifrado Cesar
                 2. Cifrado Vigenere
              -------------------------------------------------------";
-            Console.WriteLine(menu);
-            
-            Console.WriteLine("");
-            Console.Write("Su seleccion: ");
+                Console.WriteLine(menu);
+
+                Console.WriteLine("");
+                Console.Write("Su seleccion: ");
+
+                Select = int.Parse(Console.ReadLine());
+                Thread.Sleep(500);
+
+                Console.WriteLine("Espere un momento...");
+                Thread.Sleep(1000);
+
+                Console.Clear();
+
+                switch (Select)
+                {
+                    case 1: //Cifrado Cesar
+                        Console.WriteLine("Cifrado Cesar");
+                        Console.WriteLine();
+                        Thread.Sleep(700);
+
+                        String mens = "";
+                        String cipher;
+
+                        Console.WriteLine("Escriba el mensaje: ");
+                        mens = Console.ReadLine();
+                        Thread.Sleep(700);
+
+                        Console.WriteLine("------------------------------------------------------");
+
+                        cipher = cph(mens, 3);
+                        Console.WriteLine("Mensaje cifrado: {0}", cipher);
+                        Console.WriteLine("------------------------------------------------------");
+
+                        Console.ReadKey();
+                        Console.Write("Desea continuar? Y/N;  ");
+                        
+                        question = Console.ReadLine();
+
+                        Console.WriteLine("Espere un momento...");
+                        Thread.Sleep(700);
+                        Console.Clear();
+
+                        break;
+
+                    case 2://Cifrado Vigenere
+
+                        Console.WriteLine("Cifrado Vigenere");
+                        Console.WriteLine();
+                        Thread.Sleep(700);
+
+
+                        string clearText = "";
+
+                        Console.Write("Inserte el mensaje a cifrar: ");
+                        clearText = Console.ReadLine();
+                        Console.WriteLine();
+                        Console.WriteLine("Mensaje Original: " + clearText);
+                        Console.WriteLine();
+
+                        List<char> alphabet =
+                            Enumerable.Range('a', 'z' - 'a' + 1)
+                            .Select(x => (char)x).ToList();
+
+                        char[][] tabulaRecta = new char['z' - 'a' + 1][];
+                        for (int i = 0; i < tabulaRecta.Length; i++)
+                        {
+                            tabulaRecta[i] = alphabet.ToArray();
+                            var first = alphabet.First();
+                            alphabet.Remove(first);
+                            alphabet.Insert(alphabet.Count, first);
+                        }
+
+                        string keyword = "";
+                        Console.Write("Inserte su llave: ");
+                        keyword = Console.ReadLine();
+                        Console.WriteLine();
+
+                        Console.WriteLine("Llave: " + keyword);
+
+                        Thread.Sleep(700);
+                        Console.Clear();
+
+                        Console.WriteLine("------------------------------------------------------");
+                        string cipherText = Cipher(clearText, tabulaRecta, keyword);
+                        Console.WriteLine("Mensaje Cifrado: {0}", cipherText);
+
+                        string decipherText = Decipher(cipherText, tabulaRecta, keyword);
+                        Console.WriteLine("Mensaje descifrado: {0}", decipherText);
+                        Console.WriteLine("------------------------------------------------------");
+                        Console.ReadKey();
+
+                        Console.Write("Desea continuar? Y/N;  ");
+                        question = Console.ReadLine();
+
+                        Console.WriteLine("Espere un momento...");
+                        Thread.Sleep(700);
+                        Console.Clear();
+
+                        break;
+                }
+                
+            } while (question!="N");
            
-            Select = int.Parse(Console.ReadLine());
-            Thread.Sleep(500);
-
-            Console.WriteLine("Espere un momento...");
-            Thread.Sleep(1000);
-
-            Console.Clear();
-
-            switch (Select)
-            {
-                case 1: //Cifrado Cesar
-                    Console.WriteLine("Cifrado Cesar");
-                    Console.WriteLine();
-                    Thread.Sleep(700);
-
-                    String mens = "";
-                    String cipher;
-
-                    Console.WriteLine("Escriba el mensaje: ");
-                    mens = Console.ReadLine();
-                    Thread.Sleep(700);
-
-                    Console.WriteLine("------------------------------------------------------");
-
-                    cipher = cph(mens, 3);
-                    Console.WriteLine("Mensaje cifrado: {0}", cipher);
-                    Console.WriteLine("------------------------------------------------------");
-
-                    Console.ReadKey();
-                    break;
-
-                case 2://Cifrado Vigenere
-
-                    Console.WriteLine("Cifrado Vigenere");
-                    Console.WriteLine();
-                    Thread.Sleep(700);
-
-                    
-                    string clearText = "";
-
-                    Console.Write("Inserte el mensaje a cifrar: ");
-                    clearText = Console.ReadLine();
-                    Console.WriteLine();
-                    Console.WriteLine("Mensaje Original: " + clearText);
-                    Console.WriteLine();
-
-                    List<char> alphabet =
-                        Enumerable.Range('a', 'z' - 'a' + 1)
-                        .Select(x => (char)x).ToList();
-
-                    char[][] tabulaRecta = new char['z' - 'a' + 1][];
-                    for (int i = 0; i < tabulaRecta.Length; i++)
-                    {
-                        tabulaRecta[i] = alphabet.ToArray();
-                        var first = alphabet.First();
-                        alphabet.Remove(first);
-                        alphabet.Insert(alphabet.Count, first);
-                    }
-
-                    string keyword = "";
-                    Console.Write("Inserte su llave: ");
-                    keyword = Console.ReadLine();
-                    Console.WriteLine();
-
-                    Console.WriteLine("Llave: " + keyword);
-
-                    Thread.Sleep(700);
-                    Console.Clear();
-
-                    Console.WriteLine("------------------------------------------------------");
-                    string cipherText = Cipher(clearText, tabulaRecta, keyword);
-                    Console.WriteLine("Mensaje Cifrado: {0}", cipherText);
-
-                    string decipherText = Decipher(cipherText, tabulaRecta, keyword);
-                    Console.WriteLine("Mensaje descifrado: {0}", decipherText);
-                    Console.WriteLine("------------------------------------------------------");
-                    Console.ReadKey();
-
-                    break;
-            }
-            Console.ReadKey();
         }
       //------------------------------------------------------------------------------------------------------------//
         //metodos Vigenere
