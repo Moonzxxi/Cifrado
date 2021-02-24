@@ -1,0 +1,7 @@
+C:\Users\Salma Mármol\source\repos\Cifrado\bin\Debug\Cifrado.exe.config
+C:\Users\Salma Mármol\source\repos\Cifrado\bin\Debug\Cifrado.exe
+C:\Users\Salma Mármol\source\repos\Cifrado\bin\Debug\Cifrado.pdb
+C:\Users\Salma Mármol\source\repos\Cifrado\obj\Debug\Cifrado.csprojAssemblyReference.cache
+C:\Users\Salma Mármol\source\repos\Cifrado\obj\Debug\Cifrado.csproj.CoreCompileInputs.cache
+C:\Users\Salma Mármol\source\repos\Cifrado\obj\Debug\Cifrado.exe
+C:\Users\Salma Mármol\source\repos\Cifrado\obj\Debug\Cifrado.pdb
